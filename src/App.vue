@@ -6,6 +6,22 @@ import {
   Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend
 } from 'chart.js';
 
+// --- IMPORT ASSETS ---
+import profileImg from './assets/JGY06676_optimized.jpg';
+import certBICF14 from './assets/Panitia BICF14 2025 Videographer.pdf';
+import certPemira2024 from './assets/Panitia Pemira koor infokom 2024.jpg';
+import certMUS2024 from './assets/Panitia PDD MUS 2024.png'; 
+import certPubdok2023 from './assets/Panitia koor Pubdok 2023.jpg';
+import certVOB2024 from './assets/Panitia Pubdok VOB 2024.pdf';
+import certSBMC2023 from './assets/Pengurus SBMC 2023 - 2024 Desain 2.pdf';
+
+// --- IMPORT VIDEO ASSETS ---
+import videoDelusi from './assets/Coming Soon Delusi.mp4';
+import videoGMTI from './assets/Bumper Animasi GMTI.mp4';
+import videoPaskah from './assets/After Event Paskah 2025.mp4';
+import videoMUS from './assets/After Event MUS.mp4';
+import videoGala from './assets/after event gala dinner.mp4';
+
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 const activeHub = ref('engineering'); 
@@ -22,96 +38,69 @@ onUnmounted(() => window.removeEventListener('mousemove', updateSpotlight));
 const profile = {
   name: "Justin Garret Yan",
   about: "Saya adalah mahasiswa Sistem Informasi di ITB STIKOM Bali yang berfokus pada Full-stack Web Development dan Creative Content. Saya senang menggabungkan logika pemrograman dengan estetika visual untuk menciptakan solusi digital yang efisien.",
-  birth: "Medan, 11 Oktober 2003",
+  birth: "11 Oktober 2003",
   location: "Denpasar, Bali",
   education: "Sistem Informasi - ITB STIKOM Bali",
   stats: "172 cm / 69 kg",
   socials: [
-    { name: 'Github', url: 'https://github.com/JustinGarretYan', icon: 'https://cdn.simpleicons.org/github/white' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/justin-garret-yan-207b67255', icon: 'https://cdn.simpleicons.org/linkedin/0A66C2' },
-    { name: 'Instagram', url: 'https://www.instagram.com/justinyan__/', icon: 'https://cdn.simpleicons.org/instagram/E4405F' },
-    { name: 'Facebook', url: 'https://www.facebook.com/justin.yang.52831/', icon: 'https://cdn.simpleicons.org/facebook/1877F2' },
-    { name: 'Youtube', url: 'https://www.youtube.com/@justinyan9435', icon: 'https://cdn.simpleicons.org/youtube/FF0000' },
-    { name: 'WhatsApp', url: 'https://wa.me/6283196445746', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
-    { name: 'Gmail', url: 'mailto:kronixyan@gmail.com', icon: 'https://cdn.simpleicons.org/gmail/EA4335' }
+    { name: 'github', label: 'Github', url: 'https://github.com/JustinGarretYan' },
+    { name: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/justin-garret-yan-207b67255' },
+    { name: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/justinyan__/' },
+    { name: 'youtube', label: 'Youtube', url: 'https://www.youtube.com/@justinyan9435' },
+    { name: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/6283196445746' },
+    { name: 'gmail', label: 'Gmail', url: 'mailto:kronixyan@gmail.com' }
   ]
 };
 
-// --- MARQUEE & CERT DATA ---
-const videoReels = [
-  { id: 1, src: "https://www.w3schools.com/html/mov_bbb.mp4" },
-  { id: 2, src: "https://www.w3schools.com/html/movie.mp4" },
-  { id: 3, src: "https://www.w3schools.com/html/mov_bbb.mp4" },
-  { id: 4, src: "https://www.w3schools.com/html/movie.mp4" }
-];
-
+// --- LOG HUB DATA ---
 const certificates = [
-  { id: 1, title: "Web Dev Cert", img: "https://via.placeholder.com/300x200/1e293b/white?text=Sertifikat+IT" },
-  { id: 2, title: "Video Cert", img: "https://via.placeholder.com/300x200/1e293b/white?text=Sertifikat+Creative" },
-  { id: 3, title: "Database Cert", img: "https://via.placeholder.com/300x200/1e293b/white?text=Sertifikat+Sistem" },
-  { id: 4, title: "Design Cert", img: "https://via.placeholder.com/300x200/1e293b/white?text=Sertifikat+Design" }
+  { id: 1, title: "Videographer BICF14 2025", url: certBICF14, isPdf: true },
+  { id: 2, title: "Koor INFOKOM Pemira 2024", url: certPemira2024, isPdf: false },
+  { id: 3, title: "Pubdok Voice of Bali 2024", url: certVOB2024, isPdf: true },
+  { id: 4, title: "Anggota Sie PDD MUS 2024", url: certMUS2024, isPdf: false },
+  { id: 5, title: "Koor Sie Dokumentasi Mahakarya #9", url: certPubdok2023, isPdf: false },
+  { id: 6, title: "Pengurus SBMC Desain 2023-2024", url: certSBMC2023, isPdf: true }
 ];
 
-const handleVideoLoad = (e) => {
-  const video = e.target;
-  const duration = video.duration;
-  const startTime = Math.max(0, (duration / 2) - 5);
-  video.currentTime = startTime;
-  video.play();
-  video.addEventListener('timeupdate', () => {
-    if (video.currentTime > startTime + 10) {
-      video.currentTime = startTime;
-    }
-  });
-};
+const experienceLog = [
+  { year: "2025", event: "14th Bali International Choir Festival", role: "Videographer", desc: "Memproduksi konten visual video untuk ajang paduan suara internasional di Bali.", certLink: certificates[0].url },
+  { year: "2024", event: "Pemira & Pelantikan BEM-PM", role: "Koordinator INFOKOM", desc: "Bertanggung jawab atas pusat informasi dan komunikasi dalam rangkaian pemilihan raya mahasiswa ITB STIKOM Bali.", certLink: certificates[1].url },
+  { year: "2024", event: "Voice of Bali (VOB)", role: "Publikasi & Dokumentasi", desc: "Mengelola konten visual dan dokumentasi untuk event paduan suara Voice of Bali.", certLink: certificates[2].url },
+  { year: "2024", event: "Merdeka Untuk Semua (MUS '24)", role: "Anggota Sie PDD", desc: "Menangani publikasi, dekorasi, dan dokumentasi pada kegiatan DPC PATRIA Denpasar.", certLink: certificates[3].url },
+  { year: "2023", event: "Mahakarya Multimedia #9", role: "Koordinator Sie Dokumentasi", desc: "Memimpin tim dokumentasi untuk acara bertema 'Nawa Sucilpa' di ITB STIKOM Bali.", certLink: certificates[4].url },
+  { year: "2023", event: "UKM Musik (SBMC) ITB STIKOM Bali", role: "Pengurus Desain", desc: "Dedikasi sebagai pengurus divisi desain grafis untuk Unit Kegiatan Mahasiswa Musik periode 2023-2024.", certLink: certificates[5].url }
+];
 
-// --- CONTENT DATA ---
+const videoReels = [
+  { id: 1, title: "After Event Gala Dinner", url: "https://drive.google.com/file/d/16JR3yfpkxEhCLw7mEfQJIwOpja_0OeRh/view", preview: videoGala, tools: "Sony A6400 • Premiere Pro" },
+  { id: 2, title: "After Event MUS", url: "https://drive.google.com/file/d/1JwQ6pA7GYm7EFQP1eXMpHg3lUx4dClVN/view", preview: videoMUS, tools: "Sony A6400 • CapCut Desktop" },
+  { id: 3, title: "Coming Soon Delusi", url: "#", preview: videoDelusi, tools: "Sony A6400 • After Effects" },
+  { id: 4, title: "After Event Paskah 2025", url: "https://drive.google.com/file/d/1XJhzcInTMYTpWbXceQYmrC3-ebWO4SE-/view", preview: videoPaskah, tools: "Sony A6400 • Premiere Pro" },
+  { id: 5, title: "Bumper Animasi GMTI", url: "#", preview: videoGMTI, tools: "Motion Graphics • After Effects" }
+];
+
 const engineeringData = [
-  { 
-    title: "Sistem Dhammatalk", 
-    tech: ["Vue.js", "Firebase"], 
-    desc: "Platform pusat informasi dan registrasi event keagamaan dengan alur pendaftaran yang seamless.", 
-    link: "https://dhammatalk2026.web.id",
-    icons: ["vuedotjs", "firebase", "nodedotjs"] 
-  },
-  { 
-    title: "E-Voting BEM HIMA", 
-    tech: ["Vue.js", "Next.js"], 
-    desc: "Sistem voting digital real-time dengan enkripsi data untuk pemilihan ketua organisasi mahasiswa.", 
-    link: "#",
-    icons: ["vuedotjs", "nextdotjs", "tailwindcss"]
-  }
+  { title: "Sistem Dhammatalk", tech: ["Vue.js", "Next.js"], desc: "Platform registrasi event keagamaan dengan alur seamless.", link: "https://dhammatalk2026.web.id", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] },
+  { title: "E-Voting BEM HIMA", tech: ["Vue.js", "Next.js"], desc: "Sistem voting digital real-time dengan enkripsi data.", link: "#", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] }
 ];
 
 const videoWorkflow = {
-  title: "Post-Production Suite",
+  title: "Creative Suite",
   apps: [
-    { name: "Premiere", icon: "https://cdn.simpleicons.org/adobepremierepro/9999FF" },
-    { name: "After Effects", icon: "https://cdn.simpleicons.org/adobeaftereffects/9999FF" },
-    { name: "DaVinci", icon: "https://cdn.simpleicons.org/davinciresolve/white" }
-  ],
-  videoPreview: "https://www.w3schools.com/html/mov_bbb.mp4"
+    { name: "adobepremierepro", title: "Premiere Pro" },
+    { name: "adobeaftereffects", title: "After Effects" },
+    { name: "davinciresolve", title: "DaVinci Resolve" }
+  ]
 };
 
-const experienceLog = [
-  { year: "2024", event: "Panitia Wisuda XX", role: "Sie Dokumentasi", desc: "Mengelola dokumentasi visual dan editing highlight video wisuda." },
-  { year: "2023", event: "Gema Dhamma", role: "Koordinator IT", desc: "Mengembangkan infrastruktur digital untuk event skala besar." }
-];
-
 const radarData = {
-  labels: ['Web Dev', 'Video Editing', 'Music Prod', 'UI/UX', 'Database', 'VFX'],
-  datasets: [{
-    label: 'Skill Level',
-    backgroundColor: 'rgba(59, 130, 246, 0.2)',
-    borderColor: '#3b82f6',
-    pointBackgroundColor: '#3b82f6',
-    data: [92, 98, 85, 88, 78, 80]
-  }]
+  labels: ['Premiere Pro', 'After Effects', 'Vue & Next.js', 'Music Skill', 'CapCut', 'DaVinci'],
+  datasets: [{ label: 'Level', backgroundColor: 'rgba(59, 130, 246, 0.2)', borderColor: '#3b82f6', data: [100, 80, 60, 80, 80, 40] }]
 };
 
 const radarOptions = {
   responsive: true, maintainAspectRatio: false,
-  scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.05)' }, grid: { color: 'rgba(255, 255, 255, 0.05)' }, pointLabels: { color: '#64748b', font: { size: 10, weight: 'bold' } }, ticks: { display: false }, suggestedMin: 0, suggestedMax: 100 } },
+  scales: { r: { angleLines: { color: 'rgba(255, 255, 255, 0.1)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }, pointLabels: { color: '#94a3b8' }, ticks: { display: false }, suggestedMin: 0, suggestedMax: 100 } },
   plugins: { legend: { display: false } }
 };
 </script>
@@ -121,184 +110,232 @@ const radarOptions = {
   <div class="spotlight" :style="{ left: spotlightPos.x + 'px', top: spotlightPos.y + 'px' }"></div>
   <BackgroundBubbles />
 
-  <div class="min-h-screen text-slate-100 p-6 md:p-12 max-w-7xl mx-auto font-sans relative z-10">
+  <div class="min-h-screen text-slate-100 p-4 md:p-8 max-w-[1400px] mx-auto font-sans relative z-10">
     
-    <header class="relative mb-32 pt-20">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-8 space-y-8">
-          <div class="flex items-center gap-4">
-            <span class="h-[1px] w-12 bg-blue-500"></span>
-            <span class="text-blue-500 font-mono text-sm tracking-[0.3em] uppercase">Creative Developer</span>
+    <header class="relative min-h-[80vh] flex flex-col justify-center mb-16 px-4">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-8 space-y-6">
+          <div class="inline-flex items-center gap-3 bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-full">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            <span class="text-blue-400 font-mono text-[9px] uppercase tracking-[0.4em]">Available for Projects</span>
           </div>
           
-          <h1 class="text-6xl md:text-9xl font-black italic leading-[0.8] tracking-tighter uppercase drop-shadow-2xl">
-            {{ profile.name }}
+          <h1 class="text-[clamp(2.5rem,8vw,7rem)] font-black italic leading-[0.85] tracking-tighter uppercase mb-6 text-left">
+            {{ profile.name.split(' ')[0] }}<br/>
+            <span class="text-blue-600 drop-shadow-[0_0_20px_rgba(37,99,235,0.2)]">{{ profile.name.split(' ')[1] }}</span>
           </h1>
           
-          <p class="text-slate-400 text-lg md:text-xl max-w-2xl font-light leading-relaxed text-left">
-            {{ profile.about }}
-          </p>
+          <div class="max-w-lg space-y-8 text-left">
+            <p class="text-slate-400 text-lg md:text-xl font-light leading-relaxed">
+              {{ profile.about }}
+            </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10 pt-8 border-t border-white/5">
-            <div class="space-y-3">
-              <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 text-left">Biodata</h4>
-              <div class="text-[11px] font-bold uppercase tracking-widest text-slate-400 flex flex-col gap-2 text-left">
-                <span>📍 {{ profile.location }}</span>
-                <span>🎂 {{ profile.birth }}</span>
-                <span>🎓 {{ profile.education }}</span>
-                <span class="text-blue-500 opacity-50 font-mono">⚖️ {{ profile.stats }}</span>
-              </div>
+            <div class="text-[11px] font-bold uppercase tracking-widest text-slate-400 flex flex-col gap-3">
+              <span class="flex items-center gap-2">📍 {{ profile.location }}</span>
+              <span class="flex items-center gap-2">🎂 {{ profile.birth }}</span>
+              <span class="flex items-center gap-2">🎓 {{ profile.education }}</span>
+              <span class="text-blue-500 opacity-70 font-mono tracking-tighter">⚖️ {{ profile.stats }}</span>
             </div>
-            <div class="space-y-4">
-              <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 text-left">Connect</h4>
-              <div class="flex flex-wrap gap-3">
-                <a v-for="social in profile.socials" :key="social.name" :href="social.url" target="_blank"
-                   class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-blue-600/30 transition-all border border-white/5 grayscale hover:grayscale-0">
-                  <img :src="social.icon" class="w-4 h-4 opacity-60 hover:opacity-100 transition-opacity" />
-                </a>
-              </div>
+            
+            <div class="flex flex-wrap gap-3">
+              <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" 
+                 class="group flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl hover:bg-blue-600 transition-all">
+                <img 
+                  :src="s.name.toLowerCase() === 'linkedin' 
+                    ? `https://unpkg.com/simple-icons@v9/icons/linkedin.svg` 
+                    : `https://cdn.simpleicons.org/${s.name.toLowerCase()}/white`" 
+                  :class="['w-4 h-4', s.name.toLowerCase() === 'linkedin' ? 'brightness-0 invert' : '']" 
+                />
+                <span class="text-[9px] font-black uppercase tracking-widest hidden md:block">{{ s.name }}</span>
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-4 relative flex justify-center order-first lg:order-last mb-12 lg:mb-0">
-          <div class="relative w-64 h-80 lg:w-72 lg:h-96 rotate-3 hover:rotate-0 transition-transform duration-700">
-            <div class="absolute inset-0 bg-blue-600 rounded-[3rem] translate-x-4 translate-y-4 -z-10 opacity-50"></div>
-            <div class="w-full h-full bg-slate-800 rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl">
-              <img src="/src/assets/JGY06676.JPG" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" alt="Justin">
+        <div class="lg:col-span-4 flex justify-center lg:justify-end">
+          <div class="relative group w-full max-w-[320px]">
+            <div class="absolute -inset-4 bg-blue-600/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="relative aspect-[4/5] bg-slate-900 border border-white/10 transition-all duration-700 transform rotate-2 group-hover:rotate-0 shadow-2xl"
+                 style="border-radius: 3rem; overflow: hidden; isolation: isolate; -webkit-mask-image: -webkit-radial-gradient(white, black);">
+              <img :src="profileImg" class="w-full h-full object-cover transition-all duration-1000 scale-105 group-hover:scale-110 brightness-90 group-hover:brightness-110" style="border-radius: 3rem;">
+              <div class="absolute bottom-4 left-4 right-4 p-4 bg-black/40 backdrop-blur-md rounded-2xl border border-white/10 text-left">
+                <p class="text-[8px] font-mono text-blue-400 uppercase tracking-tighter mb-0.5">Base In</p>
+                <p class="font-bold text-xs">{{ profile.location }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <nav class="sticky top-10 z-50 flex justify-center mb-20">
-      <div class="flex gap-2 p-2 bg-slate-900/80 backdrop-blur-2xl rounded-full border border-white/5 shadow-2xl">
-        <button v-for="hub in ['Engineering', 'Creative', 'Log']" :key="hub" 
-          @click="activeHub = hub.toLowerCase()"
-          class="px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all"
-          :class="activeHub === hub.toLowerCase() ? 'bg-blue-600 text-white' : 'text-slate-500 hover:text-slate-300'">
-          {{ hub }}
+    <nav class="sticky top-6 z-[100] flex justify-center mb-24">
+      <div class="flex gap-1 p-1.5 bg-slate-950/60 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl">
+        <button v-for="h in ['Engineering', 'Creative', 'Log']" :key="h" @click="activeHub = h.toLowerCase()"
+          class="px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all"
+          :class="activeHub === h.toLowerCase() ? 'bg-blue-600 text-white shadow-lg' : 'text-slate-500 hover:text-white'">
+          {{ h }}
         </button>
       </div>
     </nav>
 
-    <main class="min-h-[600px]">
-      
-      <section v-if="activeHub === 'engineering'" class="grid md:grid-cols-2 gap-8 animate-in">
+    <main class="relative">
+      <section v-if="activeHub === 'engineering'" class="grid md:grid-cols-2 gap-6 animate-in text-left">
         <div v-for="p in engineeringData" :key="p.title" 
-          class="group relative p-10 bg-white/[0.02] border border-white/5 rounded-[3.5rem] hover:bg-blue-600/[0.03] hover:border-blue-500/30 transition-all duration-500 flex flex-col justify-between min-h-[350px] text-left">
-          <div>
-            <div class="flex justify-between items-start mb-8">
-              <div class="flex gap-3">
-                <div v-for="icon in p.icons" :key="icon" class="w-10 h-10 p-2 bg-slate-900 rounded-xl border border-white/5">
-                  <img :src="`https://cdn.simpleicons.org/${icon}/white`" class="w-full h-full object-contain" />
+             class="group relative overflow-hidden bg-slate-900/40 border border-white/5 rounded-[3rem] p-10 hover:border-blue-500/30 transition-all">
+          <div class="flex justify-between items-start mb-8">
+            <div class="flex -space-x-2">
+              <div v-for="icon in p.icons" :key="icon" class="w-12 h-12 p-3 bg-slate-950 rounded-xl border border-white/10 transition-transform group-hover:-translate-y-1 flex items-center justify-center">
+                <img :src="`https://cdn.simpleicons.org/${icon}/white`" class="w-full h-full object-contain">
+              </div>
+            </div>
+            <a :href="p.link" target="_blank" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white opacity-0 group-hover:opacity-100 transition-all">↗</a>
+          </div>
+          <h3 class="text-4xl font-black italic uppercase tracking-tighter mb-4 leading-none">{{ p.title }}</h3>
+          <p class="text-slate-400 text-sm leading-relaxed max-w-sm mb-6">{{ p.desc }}</p>
+          <div class="flex flex-wrap gap-2">
+            <span v-for="t in p.tech" :key="t" class="px-4 py-1.5 bg-white/5 text-[9px] font-black rounded-full border border-white/10 uppercase">{{ t }}</span>
+          </div>
+        </div>
+      </section>
+
+      <section v-if="activeHub === 'creative'" class="space-y-20 animate-in text-left">
+        <div class="marquee-wrapper">
+          <div class="marquee-content animate-marquee py-6">
+            <div v-for="n in 2" :key="n" class="flex gap-6 pr-6">
+              <div v-for="reel in videoReels" :key="reel.id" 
+                   class="w-[420px] aspect-video bg-slate-900 rounded-[2.5rem] overflow-hidden border border-white/10 relative group shadow-xl">
+                <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700">
+                  <source :src="reel.preview" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 p-8 flex flex-col justify-end">
+                  <h4 class="text-xl font-black italic uppercase tracking-tighter leading-none">{{ reel.title }}</h4>
+                  <div class="h-0 group-hover:h-6 overflow-hidden transition-all duration-500">
+                    <span class="text-[9px] font-mono text-blue-400 uppercase tracking-[0.2em]">{{ reel.tools }}</span>
+                  </div>
                 </div>
               </div>
-              <div class="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_15px_#3b82f6]"></div>
             </div>
-            <h3 class="text-4xl font-black italic uppercase tracking-tighter mb-4 text-white">{{ p.title }}</h3>
-            <p class="text-slate-400 text-sm mb-8 leading-relaxed">{{ p.desc }}</p>
           </div>
-          <div>
-            <div class="flex gap-2 mb-8">
-              <span v-for="t in p.tech" :key="t" class="px-4 py-1.5 bg-blue-500/10 text-blue-400 text-[9px] font-black rounded-full border border-blue-500/20 uppercase tracking-widest">{{ t }}</span>
+        </div>
+
+        <div class="flex justify-center -mt-10 relative z-20">
+          <a href="https://drive.google.com/drive/folders/1DcEw6owYeq-k0V9tZK9-irYmcmUQwojA?usp=drive_link" 
+             target="_blank" 
+             class="group flex items-center gap-4 bg-white/5 border border-white/10 px-8 py-4 rounded-2xl hover:bg-blue-600 transition-all shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95">
+            <img src="https://cdn.simpleicons.org/googledrive/white" class="w-5 h-5" />
+            <div class="flex flex-col">
+              <span class="text-[10px] font-black uppercase tracking-[0.2em]">Explore More Videos</span>
             </div>
-            <a :href="p.link" class="text-[10px] font-black uppercase tracking-[0.3em] flex items-center gap-4 hover:gap-6 transition-all text-white">
-              View Project <span class="text-blue-500 text-xl">→</span>
+            <span class="text-lg group-hover:translate-x-1 transition-transform">↗</span>
+          </a>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-10 items-center pt-10">
+          <div class="bg-slate-900/40 border border-white/5 rounded-[3rem] p-10 flex justify-center">
+            <div class="w-full max-w-md h-72"><Radar :data="radarData" :options="radarOptions" /></div>
+          </div>
+          <div class="space-y-6">
+            <h4 class="text-5xl font-black italic uppercase tracking-tighter leading-tight">{{ videoWorkflow.title }}</h4>
+            <p class="text-slate-400 text-lg font-light">Workflow pasca-produksi menggunakan tools standar industri.</p>
+            <div class="flex gap-4">
+              <div v-for="app in videoWorkflow.apps" :key="app.name" 
+                   class="w-16 h-16 p-4 bg-white/5 rounded-2xl border border-white/10 hover:bg-blue-600 transition-colors flex items-center justify-center">
+                <img 
+                  :src="['adobeaftereffects', 'adobepremierepro'].includes(app.name.toLowerCase())
+                    ? `https://unpkg.com/simple-icons@v9/icons/${app.name.toLowerCase()}.svg`
+                    : `https://cdn.simpleicons.org/${app.name.toLowerCase()}/white`" 
+                  :class="['w-full h-full object-contain', ['adobeaftereffects', 'adobepremierepro'].includes(app.name.toLowerCase()) ? 'brightness-0 invert' : '']"
+                  :title="app.title"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section v-if="activeHub === 'log'" class="animate-in space-y-20 text-left">
+        <div class="marquee-wrapper border-y border-white/5 py-10 bg-blue-600/5">
+          <div class="marquee-content animate-marquee-slow">
+            <div v-for="n in 2" :key="n" class="flex gap-8 pr-8">
+              <a v-for="cert in certificates" :key="cert.id" :href="cert.url" target="_blank"
+                 class="w-80 h-52 bg-slate-900 border border-white/10 rounded-[2.5rem] group hover:border-blue-500/50 transition-all overflow-hidden relative flex-shrink-0 flex items-center justify-center">
+                  <img v-if="!cert.isPdf" :src="cert.url" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 transition-all duration-700">
+                  <div v-else class="absolute inset-0 bg-slate-800 flex items-center justify-center">
+                    <svg class="w-14 h-14 text-slate-700 group-hover:text-blue-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                    </svg>
+                  </div>
+                  <div class="relative z-10 w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent">
+                      <span class="text-[10px] font-black uppercase tracking-widest text-white leading-tight mb-1">{{ cert.title }}</span>
+                      <span class="text-[8px] text-blue-400 font-mono uppercase tracking-tighter">{{ cert.isPdf ? 'Open PDF ↗' : 'View Image ↗' }}</span>
+                  </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto space-y-12">
+          <div v-for="ex in experienceLog" :key="ex.event" class="relative pl-14 before:absolute before:left-0 before:top-0 before:h-full before:w-[1px] before:bg-blue-600/20 group">
+              <div class="absolute left-[-6px] top-12 w-3 h-3 bg-blue-600 rounded-full group-hover:scale-150 transition-all shadow-[0_0_15px_#3b82f6]"></div>
+              <div class="p-10 bg-white/[0.03] border border-white/5 rounded-[3.5rem] group-hover:bg-blue-600/5 transition-all">
+                  <div class="flex flex-col md:flex-row justify-between items-start mb-6">
+                      <div class="max-w-md">
+                        <h4 class="text-3xl font-black uppercase italic text-white group-hover:text-blue-400 transition-colors leading-none">{{ ex.event }}</h4>
+                        <p class="text-blue-500 font-mono text-[10px] mt-3 tracking-[0.3em] uppercase font-bold">{{ ex.role }}</p>
+                      </div>
+                      <span class="text-5xl font-black text-white/[0.03]">{{ ex.year }}</span>
+                  </div>
+                  <p class="text-slate-400 text-sm leading-relaxed mb-8 max-w-2xl">{{ ex.desc }}</p>
+                  <a :href="ex.certLink" target="_blank" class="inline-block px-8 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-[9px] font-black uppercase hover:bg-blue-600 transition-all tracking-widest">Lihat Sertifikat</a>
+              </div>
+          </div>
+
+          <div class="pt-12 flex justify-center">
+            <a href="https://drive.google.com/drive/folders/1f0eP_SWwvtGt63IqUv8vyWBsUDujKs7V?usp=sharing" 
+               target="_blank" 
+               class="group relative inline-flex items-center gap-6 px-12 py-6 bg-blue-600 rounded-[2.5rem] overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-blue-600/20">
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+              <img src="https://cdn.simpleicons.org/googledrive/white" class="w-6 h-6" />
+              <div class="flex flex-col text-left">
+                <span class="text-[9px] font-black uppercase tracking-[0.2em] text-blue-100 opacity-70">Archive Access</span>
+                <span class="text-sm font-black uppercase tracking-widest text-white">Full Certificate Drive</span>
+              </div>
+              <span class="text-xl text-white group-hover:translate-x-1 transition-transform">↗</span>
             </a>
           </div>
         </div>
       </section>
-
-      <section v-if="activeHub === 'creative'" class="space-y-12 animate-in">
-        <div class="marquee-wrapper">
-          <div class="marquee-content animate-marquee">
-            <div v-for="n in 2" :key="n" class="flex gap-6 pr-6">
-              <div v-for="reel in videoReels" :key="reel.id" class="w-80 h-44 bg-black rounded-[2.5rem] overflow-hidden border border-white/10 relative group">
-                <video :src="reel.src" muted loop class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all" @loadedmetadata="handleVideoLoad"></video>
-                <div class="absolute bottom-4 left-4 text-[8px] font-black uppercase tracking-widest bg-blue-600 px-3 py-1 rounded-full">Reel #{{reel.id}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid lg:grid-cols-12 gap-8">
-          <div class="lg:col-span-7 bg-slate-950/50 border border-white/5 rounded-[3.5rem] p-12 flex flex-col items-center">
-            <span class="text-[10px] font-black text-slate-500 tracking-[0.4em] uppercase mb-10 text-center w-full">Skill Expertise Radar</span>
-            <div class="w-full h-72"><Radar :data="radarData" :options="radarOptions" /></div>
-          </div>
-          <div class="lg:col-span-5 bg-slate-900 border border-white/5 rounded-[3.5rem] p-12 relative overflow-hidden group min-h-[400px] text-left">
-            <video loop muted :src="videoWorkflow.videoPreview" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700"></video>
-            <div class="relative z-10 h-full flex flex-col justify-end">
-              <h4 class="text-4xl font-black italic uppercase mb-4 leading-none">{{ videoWorkflow.title }}</h4>
-              <p class="text-slate-400 text-xs mb-8 max-w-xs">Workflow sinematik: Manipulasi VFX, dynamic editing, & professional grading.</p>
-              <div class="flex gap-4">
-                <div v-for="app in videoWorkflow.apps" :key="app.name" class="p-3 bg-black/40 rounded-2xl backdrop-blur-md border border-white/5">
-                  <img :src="app.icon" class="w-7 h-7" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section v-if="activeHub === 'log'" class="animate-in space-y-12">
-        <div class="marquee-wrapper border-y border-white/5 py-8 bg-blue-600/5">
-            <div class="marquee-content animate-marquee-slow">
-                <div v-for="n in 2" :key="n" class="flex gap-6 pr-6">
-                    <div v-for="cert in certificates" :key="cert.id" class="w-64 h-40 bg-slate-900 border border-white/10 rounded-2xl overflow-hidden group hover:border-blue-500/50 transition-all flex items-center justify-center flex-shrink-0">
-                        <img :src="cert.img" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-4xl mx-auto space-y-8">
-          <div v-for="ex in experienceLog" :key="ex.event" class="relative pl-12 before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-blue-600/20 group cursor-pointer text-left">
-              <div class="absolute left-[-5px] top-10 w-3 h-3 bg-blue-600 rounded-full group-hover:scale-150 transition-transform shadow-[0_0_15px_#3b82f6]"></div>
-              
-              <div class="p-10 bg-white/5 border border-white/10 rounded-[3rem] group-hover:bg-blue-600/5 transition-all">
-                  <div class="flex justify-between items-start mb-4">
-                      <h4 class="text-2xl font-black uppercase italic text-white group-hover:text-blue-400 leading-tight">{{ ex.event }}</h4>
-                      <span class="text-4xl font-black text-white/5">{{ ex.year }}</span>
-                  </div>
-                  <p class="text-blue-500 font-mono text-[10px] mb-4 tracking-[0.3em] uppercase font-bold">{{ ex.role }}</p>
-                  <p class="text-slate-400 text-sm leading-relaxed mb-6">{{ ex.desc }}</p>
-                  <button class="px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-[9px] font-black uppercase hover:bg-blue-600 transition-all text-white">Lihat Detail</button>
-              </div>
-          </div>
-        </div>
-      </section>
-
     </main>
 
-    <footer class="mt-40 py-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[9px] font-bold tracking-[0.5em] uppercase text-slate-600 gap-6">
-      <span>{{ profile.name }}</span>
-      <span>Copyright © 2026 — Bali, Indonesia</span>
+    <footer class="mt-40 pb-16 border-t border-white/5 pt-20 flex flex-col items-center gap-8">
+      <div class="text-[clamp(1.5rem,6vw,4rem)] font-black italic text-white/5 select-none uppercase tracking-widest text-center">
+        {{ profile.name }}
+      </div>
+      <div class="text-[9px] font-bold tracking-[0.5em] uppercase text-slate-600">
+        © 2026 — {{ profile.location.toUpperCase() }}
+      </div>
     </footer>
   </div>
 </template>
 
 <style scoped>
-/* GLOBAL & OVERLAYS */
 .grain-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.04; pointer-events: none; z-index: 5; }
 .spotlight { width: 800px; height: 800px; background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(2, 6, 23, 0) 70%); border-radius: 50%; position: fixed; pointer-events: none; z-index: -1; transform: translate(-50%, -50%); }
 
-/* MARQUEE CORE */
 .marquee-wrapper { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; overflow: hidden; }
 .marquee-content { display: flex; width: max-content; }
 
-@keyframes marquee-scroll { 
-  0% { transform: translateX(0); } 
-  100% { transform: translateX(-50%); } 
-}
+@keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-.animate-marquee { animation: marquee-scroll 30s linear infinite; }
+.animate-shimmer { animation: shimmer 2s infinite; }
+.animate-marquee { animation: marquee-scroll 40s linear infinite; }
 .animate-marquee-slow { animation: marquee-scroll 60s linear infinite; }
 .marquee-content:hover { animation-play-state: paused; }
 
-/* ENTRANCE ANIMATION */
 .animate-in { animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 </style>
