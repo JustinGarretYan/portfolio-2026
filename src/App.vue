@@ -14,6 +14,7 @@ import certMUS2024 from './assets/Panitia PDD MUS 2024.png';
 import certPubdok2023 from './assets/Panitia koor Pubdok 2023.jpg';
 import certVOB2024 from './assets/Panitia Pubdok VOB 2024.jpg';
 import certSBMC2023 from './assets/Pengurus SBMC 2023 - 2024 Desain 2.jpg';
+import certBangkit2024 from './assets/[Bangkit 2024 Batch 1] Certificate - C113D4KY0974.jpg';
 
 // --- IMPORT VIDEO ASSETS (VERSI 10 DETIK / _1.mp4) ---
 import videoDelusi from './assets/Coming Soon Delusi_1.mp4';
@@ -59,16 +60,63 @@ const certificates = [
   { id: 3, title: "Pubdok Voice of Bali 2024", url: certVOB2024, isPdf: false },
   { id: 4, title: "Anggota Sie PDD MUS 2024", url: certMUS2024, isPdf: false },
   { id: 5, title: "Koor Sie Dokumentasi Mahakarya #9", url: certPubdok2023, isPdf: false },
-  { id: 6, title: "Pengurus SBMC Desain 2023-2024", url: certSBMC2023, isPdf: false }
+  { id: 6, title: "Pengurus SBMC Desain 2023-2024", url: certSBMC2023, isPdf: false },
+  { id: 7, title: "Bangkit Academy - Cloud Computing", url: certBangkit2024, isPdf: false }
 ];
 
+// Gunakan variabel import-nya langsung agar lebih aman, 
+// atau pastikan index-nya benar-benar ada.
+
 const experienceLog = [
-  { year: "2025", event: "14th Bali International Choir Festival", role: "Videographer", desc: "Memproduksi konten visual video untuk ajang paduan suara internasional di Bali.", certLink: certificates[0].url },
-  { year: "2024", event: "Pemira & Pelantikan BEM-PM", role: "Koordinator INFOKOM", desc: "Bertanggung jawab atas pusat informasi dan komunikasi dalam rangkaian pemilihan raya mahasiswa ITB STIKOM Bali.", certLink: certificates[1].url },
-  { year: "2024", event: "Voice of Bali (VOB)", role: "Publikasi & Dokumentasi", desc: "Mengelola konten visual dan dokumentasi untuk event paduan suara Voice of Bali.", certLink: certificates[2].url },
-  { year: "2024", event: "Merdeka Untuk Semua (MUS '24)", role: "Anggota Sie PDD", desc: "Menangani publikasi, dekorasi, dan dokumentasi pada kegiatan DPC PATRIA Denpasar.", certLink: certificates[3].url },
-  { year: "2023", event: "Mahakarya Multimedia #9", role: "Koordinator Sie Dokumentasi", desc: "Memimpin tim dokumentasi untuk acara bertema 'Nawa Sucilpa' di ITB STIKOM Bali.", certLink: certificates[4].url },
-  { year: "2023", event: "UKM Musik (SBMC) ITB STIKOM Bali", role: "Pengurus Desain", desc: "Dedikasi sebagai pengurus divisi desain grafis untuk Unit Kegiatan Mahasiswa Musik periode 2023-2024.", certLink: certificates[5].url }
+  { 
+    year: "2025", 
+    event: "14th Bali International Choir Festival", 
+    role: "Videographer", 
+    desc: "Memproduksi konten visual video untuk ajang paduan suara internasional di Bali.", 
+    certLink: certBICF14 // Panggil langsung variabel import-nya
+  },
+  { 
+    year: "2024", 
+    event: "Pemira & Pelantikan BEM-PM", 
+    role: "Koordinator INFOKOM", 
+    desc: "Bertanggung jawab atas pusat informasi dan komunikasi dalam rangkaian pemilihan raya mahasiswa ITB STIKOM Bali.", 
+    certLink: certPemira2024 
+  },
+  { 
+    year: "2024", 
+    event: "Voice of Bali (VOB)", 
+    role: "Publikasi & Dokumentasi", 
+    desc: "Mengelola konten visual dan dokumentasi untuk event paduan suara Voice of Bali.", 
+    certLink: certVOB2024 
+  },
+  { 
+    year: "2024", 
+    event: "Merdeka Untuk Semua (MUS '24)", 
+    role: "Anggota Sie PDD", 
+    desc: "Menangani publikasi, dekorasi, dan dokumentasi pada kegiatan DPC PATRIA Denpasar.", 
+    certLink: certMUS2024 
+  },
+  { 
+    year: "2024", 
+    event: "Bangkit Academy - Cloud Computing", 
+    role: "Peserta", 
+    desc: "Mengikuti program pelatihan cloud computing.", 
+    certLink: certBangkit2024 
+  },
+  { 
+    year: "2023", 
+    event: "Mahakarya Multimedia #9", 
+    role: "Koordinator Sie Dokumentasi", 
+    desc: "Memimpin tim dokumentasi untuk acara bertema 'Nawa Sucilpa' di ITB STIKOM Bali.", 
+    certLink: certPubdok2023 
+  },
+  { 
+    year: "2023", 
+    event: "UKM Musik (SBMC) ITB STIKOM Bali", 
+    role: "Pengurus Desain", 
+    desc: "Dedikasi sebagai pengurus divisi desain grafis untuk Unit Kegiatan Mahasiswa Musik periode 2023-2024.", 
+    certLink: certSBMC2023 
+  }
 ];
 
 const videoReels = [
@@ -81,7 +129,7 @@ const videoReels = [
 
 const engineeringData = [
   { title: "Sistem Dhammatalk", tech: ["Vue.js", "Next.js"], desc: "Platform registrasi event keagamaan dengan alur seamless.", link: "https://dhammatalk2026.web.id", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] },
-  { title: "E-Voting BEM HIMA", tech: ["Vue.js", "Next.js"], desc: "Sistem voting digital real-time dengan enkripsi data.", link: "#", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] }
+  { title: "E-Voting BEM HIMA", tech: ["Vue.js", "Next.js"], desc: "Sistem voting digital real-time dengan enkripsi data.", link: "https://voting-web-phi.vercel.app/", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] }
 ];
 
 const videoWorkflow = {
