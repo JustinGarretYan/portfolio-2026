@@ -23,9 +23,16 @@ dist-ssr
 *.sln
 *.sw?
 
+# --- ASSETS MANAGEMENT ---
+# Abaikan file video asli yang besar (tanpa akhiran _1)
 /src/assets/*.mp4
+# TAPI izinkan video preview 10 detik (akhiran _1)
+!/src/assets/*_1.mp4
+
+# Izinkan semua gambar profil dan sertifikat
+!/src/assets/*.jpg
+!/src/assets/*.png
+!/src/assets/*.jpeg
+
+# Abaikan PDF asli jika masih ada agar tidak berat
 /src/assets/*.pdf
-/src/assets/*.png
-/src/assets/*.jpg
-/src/assets/*.JPG
-!/src/assets/JGY06676_optimized.jpg

@@ -6,21 +6,21 @@ import {
   Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend
 } from 'chart.js';
 
-// --- IMPORT ASSETS ---
+// --- IMPORT ASSETS (FOTO & SERTIFIKAT) ---
 import profileImg from './assets/JGY06676_optimized.jpg';
-import certBICF14 from './assets/Panitia BICF14 2025 Videographer.pdf';
+import certBICF14 from './assets/Panitia BICF14 2025 Videographer.jpg';
 import certPemira2024 from './assets/Panitia Pemira koor infokom 2024.jpg';
 import certMUS2024 from './assets/Panitia PDD MUS 2024.png'; 
 import certPubdok2023 from './assets/Panitia koor Pubdok 2023.jpg';
-import certVOB2024 from './assets/Panitia Pubdok VOB 2024.pdf';
-import certSBMC2023 from './assets/Pengurus SBMC 2023 - 2024 Desain 2.pdf';
+import certVOB2024 from './assets/Panitia Pubdok VOB 2024.jpg';
+import certSBMC2023 from './assets/Pengurus SBMC 2023 - 2024 Desain 2.jpg';
 
-// --- IMPORT VIDEO ASSETS ---
-import videoDelusi from './assets/Coming Soon Delusi.mp4';
-import videoGMTI from './assets/Bumper Animasi GMTI.mp4';
-import videoPaskah from './assets/After Event Paskah 2025.mp4';
-import videoMUS from './assets/After Event MUS.mp4';
-import videoGala from './assets/after event gala dinner.mp4';
+// --- IMPORT VIDEO ASSETS (VERSI 10 DETIK / _1.mp4) ---
+import videoDelusi from './assets/Coming Soon Delusi_1.mp4';
+import videoGMTI from './assets/Bumper Animasi GMTI_1.mp4';
+import videoPaskah from './assets/After Event Paskah 2025_1.mp4';
+import videoMUS from './assets/After Event MUS_1.mp4';
+import videoGala from './assets/after event gala dinner_1.mp4';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
@@ -54,12 +54,12 @@ const profile = {
 
 // --- LOG HUB DATA ---
 const certificates = [
-  { id: 1, title: "Videographer BICF14 2025", url: certBICF14, isPdf: true },
+  { id: 1, title: "Videographer BICF14 2025", url: certBICF14, isPdf: false },
   { id: 2, title: "Koor INFOKOM Pemira 2024", url: certPemira2024, isPdf: false },
-  { id: 3, title: "Pubdok Voice of Bali 2024", url: certVOB2024, isPdf: true },
+  { id: 3, title: "Pubdok Voice of Bali 2024", url: certVOB2024, isPdf: false },
   { id: 4, title: "Anggota Sie PDD MUS 2024", url: certMUS2024, isPdf: false },
   { id: 5, title: "Koor Sie Dokumentasi Mahakarya #9", url: certPubdok2023, isPdf: false },
-  { id: 6, title: "Pengurus SBMC Desain 2023-2024", url: certSBMC2023, isPdf: true }
+  { id: 6, title: "Pengurus SBMC Desain 2023-2024", url: certSBMC2023, isPdf: false }
 ];
 
 const experienceLog = [
@@ -262,15 +262,10 @@ const radarOptions = {
             <div v-for="n in 2" :key="n" class="flex gap-8 pr-8">
               <a v-for="cert in certificates" :key="cert.id" :href="cert.url" target="_blank"
                  class="w-80 h-52 bg-slate-900 border border-white/10 rounded-[2.5rem] group hover:border-blue-500/50 transition-all overflow-hidden relative flex-shrink-0 flex items-center justify-center">
-                  <img v-if="!cert.isPdf" :src="cert.url" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 transition-all duration-700">
-                  <div v-else class="absolute inset-0 bg-slate-800 flex items-center justify-center">
-                    <svg class="w-14 h-14 text-slate-700 group-hover:text-blue-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-                    </svg>
-                  </div>
+                  <img :src="cert.url" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-100 transition-all duration-700">
                   <div class="relative z-10 w-full h-full flex flex-col justify-end p-8 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent">
                       <span class="text-[10px] font-black uppercase tracking-widest text-white leading-tight mb-1">{{ cert.title }}</span>
-                      <span class="text-[8px] text-blue-400 font-mono uppercase tracking-tighter">{{ cert.isPdf ? 'Open PDF ↗' : 'View Image ↗' }}</span>
+                      <span class="text-[8px] text-blue-400 font-mono uppercase tracking-tighter">View Document ↗</span>
                   </div>
               </a>
             </div>
