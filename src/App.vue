@@ -129,7 +129,7 @@ const videoReels = [
 
 const engineeringData = [
   { title: "Sistem Dhammatalk", tech: ["Vue.js", "Next.js"], desc: "Platform registrasi event keagamaan dengan alur seamless.", link: "https://dhammatalk2026.web.id", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] },
-  { title: "E-Voting BEM HIMA", tech: ["Vue.js", "Next.js"], desc: "Sistem voting digital real-time dengan enkripsi data.", link: "https://voting-web-phi.vercel.app/", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] }
+  { title: "E-Voting BEM HIMA", tech: ["Vue.js", "Next.js"], desc: "Sistem voting digital real-time dengan enkripsi data.", link: "https://voting-web-tau.vercel.app/", icons: ["vuedotjs", "nextdotjs", "tailwindcss"] }
 ];
 
 const videoWorkflow = {
