@@ -46,7 +46,7 @@ const profile = {
   socials: [
     { name: 'github', label: 'Github', url: 'https://github.com/JustinGarretYan' },
     { name: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/justin-garret-yan-207b67255' },
-    { name: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/justinyan__/' },
+    { name: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/justinyan___/' },
     { name: 'youtube', label: 'Youtube', url: 'https://www.youtube.com/@justinyan9435' },
     { name: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/6283196445746' },
     { name: 'gmail', label: 'Gmail', url: 'mailto:kronixyan@gmail.com' }
