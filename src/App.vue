@@ -358,7 +358,7 @@ const radarOptions = {
         {{ profile.name }}
       </div>
       <div class="text-[9px] font-bold tracking-[0.5em] uppercase text-slate-600">
-        ©  — {{ profile.location.toUpperCase() }}
+        © 2026 — {{ profile.location.toUpperCase() }}
       </div>
     </footer>
   </div>
