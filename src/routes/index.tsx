@@ -124,11 +124,14 @@ const engineering = {
 const videoReels = [
   { id: 1, title: "After Event Gala Dinner", url: "https://drive.google.com/file/d/16JR3yfpkxEhCLw7mEfQJIwOpja_0OeRh/view", preview: "/assets/after event gala dinner_1.mp4", tools: "Sony A6400 • Premiere Pro", type: "event" },
   { id: 2, title: "After Event MUS", url: "https://drive.google.com/file/d/1JwQ6pA7GYm7EFQP1eXMpHg3lUx4dClVN/view", preview: "/assets/After Event MUS_1.mp4", tools: "Sony A6400 • CapCut Desktop", type: "event" },
-  { id: 3, title: "Coming Soon Delusi", url: "#", preview: "/assets/Coming Soon Delusi_1.mp4", tools: "Sony A6400 • After Effects", type: "event" },
+  { id: 3, title: "Coming Soon Delusi", url: "https://drive.google.com/file/d/1xrggWslxhlotZClU4F36k0j18YiVLYTW/view?usp=sharing", preview: "/assets/Coming Soon Delusi_1.mp4", tools: "Motion Graphics • After Effects", type: "event" },
   { id: 4, title: "After Event Paskah 2025", url: "https://drive.google.com/file/d/1XJhzcInTMYTpWbXceQYmrC3-ebWO4SE-/view", preview: "/assets/After Event Paskah 2025_1.mp4", tools: "Sony A6400 • Premiere Pro", type: "event" },
-  { id: 5, title: "Bumper Animasi GMTI", url: "#", preview: "/assets/Bumper Animasi GMTI_1.mp4", tools: "Motion Graphics • After Effects", type: "event" },
-  { id: 6, title: "Bali Coastline Cinematic", url: DRIVE_LINK, preview: "/assets/After Event MUS_1.mp4", tools: "DJI Drone • DaVinci Resolve", type: "drone" },
-  { id: 7, title: "Urban Architecture Perspective", url: DRIVE_LINK, preview: "/assets/after event gala dinner_1.mp4", tools: "DJI Drone • Premiere Pro", type: "drone" },
+  { id: 5, title: "Bumper Animasi GMTI", url: "https://drive.google.com/file/d/1zKXx3ShdngseaIX7bXFW0tIamA2puza7/view?usp=sharing", preview: "/assets/Bumper Animasi GMTI_1.mp4", tools: "Motion Graphics • After Effects", type: "event" },
+  { id: 6, title: "Mancingan Rice Terrace", url: "https://drive.google.com/file/d/1wAJ29SPS5rZ5pCot54QhdpyM2603Krru/view?usp=sharing", preview: "/assets/dji_fly_1.mp4", tools: "DJI Drone • DaVinci Resolve", type: "drone" },
+  { id: 7, title: "Sky of Bali", url: "https://drive.google.com/file/d/1XT99wMPKcD06mDzRD9qdy4d-L5b7QXAQ/view?usp=sharing", preview: "/assets/dji_fly_2.mp4", tools: "DJI Drone Neo 2 • Premiere Pro", type: "drone" },
+  { id: 8, title: "Sunset of Mengwi", url: "https://drive.google.com/file/d/10IythvQH5ENWNO1HVJ4WIU4GKA48CnGM/view?usp=sharing", preview: "/assets/dji_fly_3.mp4", tools: "DJI Drone Neo 2 • Premiere Pro", type: "drone" },
+  { id: 9, title: "Sunrise of Bali", url: "https://drive.google.com/file/d/1JdDSnpRGDc4Z_iNUvRpntamc3lL0MMO5/view?usp=sharing", preview: "/assets/dji_fly_4.mp4", tools: "DJI Drone Neo 2 • Premiere Pro", type: "drone" },
+  { id: 10, title: "Abhayadana Vihara Sakyamuni Bali", url: "https://drive.google.com/file/d/16ZNYP685567gGOGP0IcAeJXFsw3_BP24/view?usp=sharing", preview: "/assets/dji_fly_5.mp4", tools: "DJI Drone Neo 2 • Premiere Pro", type: "drone" },
 ];
 
 const videoWorkflow = {
