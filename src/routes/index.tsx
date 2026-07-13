@@ -178,14 +178,23 @@ const logData = {
 const radarLabels = ["Premiere", "After FX", "Vue/Next", "Drone", "CapCut", "DaVinci"];
 const radarValues = [100, 80, 90, 95, 80, 50];
 
-const ICON_COLORS: Record<string, string> = {
-  vuedotjs: "#42b883",
-  nextdotjs: "#e5e7eb",
-  tailwindcss: "#38bdf8",
-  adobepremierepro: "#9999ff",
-  adobeaftereffects: "#d3a4ff",
-  davinciresolve: "#eab308",
-  dji: "#e5e7eb",
+// PERBAIKAN UTAMA: Mapping warna global berbasis class Tailwind CSS agar tidak bentrok dengan parser SVG
+const BRAND_TAILWIND_COLORS: Record<string, string> = {
+  github: "text-slate-400 group-hover:text-white",
+  linkedin: "text-[#0A66C2] group-hover:text-white",
+  instagram: "text-[#E1306C] group-hover:text-white",
+  youtube: "text-[#FF0000] group-hover:text-white",
+  whatsapp: "text-[#25D366] group-hover:text-white",
+  gmail: "text-[#EA4335] group-hover:text-white",
+  
+  // Kosongkan agar membaca warna SVG asli multi-element bawaan komponen Icon
+  vuedotjs: "",
+  nextdotjs: "",
+  tailwindcss: "",
+  adobepremierepro: "",
+  adobeaftereffects: "",
+  davinciresolve: "",
+  dji: ""
 };
 
 const marqueeItems = [
@@ -304,21 +313,28 @@ function Portfolio() {
                 <div className="flex items-center gap-2">🎓 {t.eduLabel.split(" — ")[0]}</div>
               </div>
 
+              {/* SOCIALS WRAPPER */}
               <div className="flex flex-wrap gap-2 pt-1">
-                {profile.socials.map((s) => (
-                  <a
-                    key={s.name}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2.5 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-2.5 transition-all duration-300 hover:border-electric hover:bg-navy-600"
-                  >
-                    <Icon name={s.name} className="h-4 w-4 fill-slate-400 transition-colors group-hover:fill-white" />
-                    <span className="text-xs font-semibold tracking-wider text-slate-300 group-hover:text-white">
-                      {s.label}
-                    </span>
-                  </a>
-                ))}
+                {profile.socials.map((s) => {
+                  const currentBrandColor = BRAND_TAILWIND_COLORS[s.name.toLowerCase()] || "text-slate-400";
+                  return (
+                    <a
+                      key={s.name}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2.5 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-2.5 transition-all duration-300 hover:border-electric hover:bg-navy-600"
+                    >
+                      <Icon 
+  name={s.name} 
+  className={`h-4 w-4 ${BRAND_TAILWIND_COLORS[s.name.toLowerCase()] || "text-slate-400"}`} 
+/>
+                      <span className="text-xs font-semibold tracking-wider text-slate-300 group-hover:text-white">
+                        {s.label}
+                      </span>
+                    </a>
+                  );
+                })}
               </div>
 
               <div className="flex flex-wrap gap-4 pt-3">
@@ -359,23 +375,25 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* TECH TAPE */}
+        {/* TECH TAPE (MARQUEE) */}
         <div className="marquee-mask relative -mx-5 overflow-hidden border-y border-white/5 bg-white/[0.015] py-5 sm:-mx-8">
           <div className="marquee-track gap-12 pr-12">
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <span
-                key={i}
-                className="flex items-center gap-3 font-display text-lg font-bold uppercase italic tracking-tight text-slate-500"
-              >
-                <Icon
-                  name={item.icon}
-                  className="h-5 w-5 shrink-0"
-                  style={{ fill: ICON_COLORS[item.icon] ?? "#64748b" }}
-                />
-                {item.label}
-                <span className="ml-9 text-electric/40">✦</span>
-              </span>
-            ))}
+            {[...marqueeItems, ...marqueeItems].map((item, i) => {
+              const currentBrandColor = BRAND_TAILWIND_COLORS[item.icon.toLowerCase()] || "text-slate-500";
+              return (
+                <span
+                  key={i}
+                  className="flex items-center gap-3 font-display text-lg font-bold uppercase italic tracking-tight text-slate-500"
+                >
+                  <Icon
+                    name={item.icon}
+                    className={`h-5 w-5 shrink-0 ${currentBrandColor}`}
+                  />
+                  {item.label}
+                  <span className="ml-9 text-electric/40">✦</span>
+                </span>
+              );
+            })}
           </div>
         </div>
 
@@ -415,18 +433,20 @@ function Portfolio() {
                       <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-[5rem] bg-navy-500/5 transition-colors duration-500 group-hover:bg-navy-500/15" />
                       <div className="mb-6 flex items-center justify-between">
                         <div className="flex gap-3">
-                          {p.icons.map((ic) => (
-                            <div
-                              key={ic}
-                              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/5 bg-white/5 transition-all duration-300 group-hover:border-electric/20 group-hover:bg-navy-700/30"
-                            >
-                              <Icon
-                                name={ic}
-                                className="h-5 w-5 transition-transform duration-300 group-hover:scale-110"
-                                style={{ fill: ICON_COLORS[ic] ?? "#cbd5e1" }}
-                              />
-                            </div>
-                          ))}
+                          {p.icons.map((ic) => {
+                            const currentBrandColor = BRAND_TAILWIND_COLORS[ic.toLowerCase()] || "text-slate-400";
+                            return (
+                              <div
+                                key={ic}
+                                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/5 bg-white/5 transition-all duration-300 group-hover:border-electric/20 group-hover:bg-navy-700/30"
+                              >
+                                <Icon
+                                  name={ic}
+                                  className={`h-5 w-5 ${currentBrandColor} transition-transform duration-300 group-hover:scale-110`}
+                                />
+                              </div>
+                            );
+                          })}
                         </div>
                         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-sm text-slate-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-navy-500/10 group-hover:text-navy-300">
                           ↗
@@ -488,7 +508,6 @@ function Portfolio() {
                       style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}
                       className="group relative flex aspect-[9/12] flex-col justify-end overflow-hidden rounded-3xl border border-white/5 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-electric/30"
                     >
-                      {/* Video Preview Element */}
                       <div className="absolute inset-0 bg-slate-900 overflow-hidden">
                         <video
                           src={reel.preview}
@@ -525,6 +544,7 @@ function Portfolio() {
                   </span>
                 </a>
 
+                {/* CREATIVE SUITE WORKFLOW */}
                 <div className="space-y-6 rounded-3xl border border-white/5 bg-white/[0.01] p-8">
                   <div>
                     <h3 className="font-display text-lg font-bold uppercase italic tracking-tight text-foreground">
@@ -533,20 +553,22 @@ function Portfolio() {
                     <p className="mt-1 text-xs text-slate-400">{t.workflowDesc}</p>
                   </div>
                   <div className="flex flex-wrap gap-6">
-                    {videoWorkflow.apps.map((app) => (
-                      <div key={app.name} className="flex flex-col items-center gap-2" title={app.title}>
-                        <div className="group flex h-14 w-14 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] shadow-inner transition-all duration-300 hover:-translate-y-1 hover:border-electric/30 hover:bg-white/[0.06]">
-                          <Icon
-                            name={app.name}
-                            className="h-7 w-7 transition-transform duration-300 group-hover:scale-110"
-                            style={{ fill: ICON_COLORS[app.name] ?? "#cbd5e1" }}
-                          />
+                    {videoWorkflow.apps.map((app) => {
+                      const currentBrandColor = BRAND_TAILWIND_COLORS[app.name.toLowerCase()] || "text-slate-400";
+                      return (
+                        <div key={app.name} className="flex flex-col items-center gap-2" title={app.title}>
+                          <div className="group flex h-14 w-14 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] shadow-inner transition-all duration-300 hover:-translate-y-1 hover:border-electric/30 hover:bg-white/[0.06]">
+                            <Icon
+                              name={app.name}
+                              className={`h-7 w-7 ${currentBrandColor} transition-transform duration-300 group-hover:scale-110`}
+                            />
+                          </div>
+                          <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                            {app.title.split(" ")[0]}
+                          </span>
                         </div>
-                        <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                          {app.title.split(" ")[0]}
-                        </span>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </section>

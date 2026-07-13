@@ -1,6 +1,153 @@
 import type { CSSProperties } from "react";
 
-export const iconPaths: Record<string, string> = {
+export function Icon({
+  name,
+  className,
+  style,
+}: {
+  name: string;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  const iconName = name.toLowerCase();
+
+  // ==========================================
+  // 1. LOGO MULTI-ELEMENT DAN WARNA RESMI (ANTI-ABU-ABU)
+  // ==========================================
+  
+  if (iconName === "adobepremierepro") {
+    return (
+      <svg className={className} style={style} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Kotak latar ungu gelap khas Premiere Pro */}
+        <rect width="24" height="24" rx="4" fill="#160527" />
+        {/* Border / Outline Neon Magenta */}
+        <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="3.25" stroke="#EA77FF" strokeWidth="1.5" />
+        {/* Teks Pr resmi yang tebal dan presisi */}
+        <text x="4.5" y="16" fill="#EA77FF" fontSize="11" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Pr</text>
+      </svg>
+    );
+  }
+
+  if (iconName === "adobeaftereffects") {
+    return (
+      <svg className={className} style={style} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Kotak latar biru gelap khas After Effects */}
+        <rect width="24" height="24" rx="4" fill="#130624" />
+        {/* Border / Outline Neon Cyan/Biru */}
+        <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="3.25" stroke="#9999FF" strokeWidth="1.5" />
+        {/* Teks Ae resmi yang tebal dan presisi */}
+        <text x="4.5" y="16" fill="#9999FF" fontSize="11" fontWeight="800" fontFamily="Inter, system-ui, sans-serif">Ae</text>
+      </svg>
+    );
+  }
+
+  if (iconName === "davinciresolve") {
+    return (
+      <svg className={className} style={style} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          {/* Gradasi Warna untuk masing-masing Tetesan Air */}
+          <linearGradient id="dvBlueDrop" x1="50" y1="20" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#29B6F6"/>
+            <stop offset="100%" stopColor="#E0F7FA"/>
+          </linearGradient>
+          <linearGradient id="dvYellowDrop" x1="20" y1="60" x2="45" y2="55" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FFF59D"/>
+            <stop offset="100%" stopColor="#FFFDE7"/>
+          </linearGradient>
+          <linearGradient id="dvRedDrop" x1="80" y1="60" x2="55" y2="55" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FF5252"/>
+            <stop offset="100%" stopColor="#FFEBEE"/>
+          </linearGradient>
+          
+          {/* Gradasi Lingkaran Luar (Color Wheel Spectrum) */}
+          <linearGradient id="dvSpectrum" x1="0" y1="0" x2="100" y2="100">
+            <stop offset="0%" stopColor="#00E5FF"/>
+            <stop offset="25%" stopColor="#00FF00"/>
+            <stop offset="50%" stopColor="#FFFF00"/>
+            <stop offset="75%" stopColor="#FF0000"/>
+            <stop offset="100%" stopColor="#9C27B0"/>
+          </linearGradient>
+        </defs>
+
+        {/* Latar Belakang Lingkaran Hitam Bulat */}
+        <circle cx="50" cy="50" r="46" fill="#262626" />
+        
+        {/* Ring Spektrum Warna di Pinggiran */}
+        <circle cx="50" cy="50" r="45" stroke="url(#dvSpectrum)" strokeWidth="2.5" />
+
+        {/* Tetesan Air ATAS (BIRU) - Meruncing ke pusat (50,51) */}
+        <path d="M50 51C46 45 38 35 38 29C38 22.4 43.4 17 50 17C56.6 17 62 22.4 62 29C62 35 54 45 50 51Z" fill="url(#dvBlueDrop)"/>
+
+        {/* Tetesan Air KIRI BAWAH (KUNING) - Meruncing ke pusat (49,53) */}
+        <path d="M49 53C44 51 32 49 27 54C22 59 22 67 27 72C32 77 40 77 45 72C50 67 49 57 49 53Z" fill="url(#dvYellowDrop)"/>
+
+        {/* Tetesan Air KANAN BAWAH (MERAH) - Meruncing ke pusat (51,53) */}
+        <path d="M51 53C56 51 68 49 73 54C78 59 78 67 73 72C68 77 60 77 55 72C50 67 51 57 51 53Z" fill="url(#dvRedDrop)"/>
+      </svg>
+    );
+  }
+
+  if (iconName === "dji") {
+    return (
+      <svg className={className} style={style} viewBox="1.5 4.5 24 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Huruf D (Tetap di posisi awal) */}
+        <path d="M1.5 5H7C10.5 5 12.5 7.2 12.5 11C12.5 14.8 10.5 17 7 17H1.5V5ZM4.5 7.5V14.5H6.5C8.3 14.5 9.3 13.5 9.3 11C9.3 8.5 8.3 7.5 6.5 7.5H4.5Z" fill="#FFFFFF" />
+        
+        {/* Huruf J (Digeser ke kanan sebanyak +2.5 unit agar ekornya bebas dari huruf D) */}
+        <path d="M17.0 5H19.7V12.2C19.7 14.5 18.3 17 15.7 17C13.7 17 12.5 15.8 12.5 13.8H15.3C15.3 14.3 15.5 14.6 15.8 14.6C16.5 14.6 17.0 14 17.0 12.8V5Z" fill="#FFFFFF" />
+        
+        {/* Huruf I (Ikut digeser ke kanan sebanyak +2.8 unit agar jaraknya proporsional dengan J) */}
+        <path d="M22.0 5H24.8V17H22.0V5Z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  if (iconName === "vuedotjs") {
+    return (
+      <svg className={className} style={style} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 1.61H17.72L12 11.52L6.28 1.61H0L12 22.39L24 1.61Z" fill="#41B883"/>
+        <path d="M17.72 1.61H12L6.28 1.61L12 11.52L17.72 1.61Z" fill="#35495E"/>
+      </svg>
+    );
+  }
+
+  if (iconName === "tailwindcss") {
+    return (
+      <svg className={className} style={style} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 6.5c-2.5 0-4 1.25-4.5 3.75 1-1.25 2.25-1.75 3.75-1.5 1.14.19 1.95.83 2.84 1.55 1.47 1.19 3.18 2.57 6.4 2.57 2.5 0 4-1.25 4.5-3.75-1 1.25-2.25 1.75-3.75 1.5-1.14-.19-1.95-.83-2.84-1.55-1.47-1.19-3.18-2.57-6.41-2.57zm-8 7c-2.5 0-4 1.25-4.5 3.75 1-1.25 2.25-1.75 3.75-1.5 1.14.19 1.95.83 2.85 1.55 1.46 1.19 3.17 2.57 6.4 2.57 2.5 0 4-1.25 4.5-3.75-1 1.25-2.25 1.75-3.75 1.5-1.14-.19-1.95-.83-2.84-1.55-1.47-1.19-3.19-2.57-6.41-2.57z" fill="#38BDF8"/>
+      </svg>
+    );
+  }
+
+  if (iconName === "nextdotjs") {
+    return (
+      <svg className={className} style={style} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="12" fill="#000000"/>
+        <path d="M18.75 18.25L12.56 10.28V18.25H10.93V8.53H12.35L18.54 16.5V8.53H20.17V18.25H18.75Z" fill="url(#nextGlow)"/>
+        <defs>
+          <linearGradient id="nextGlow" x1="15" y1="8.5" x2="18.5" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stopColor="white"/>
+            <stop offset="1" stopColor="white" stopOpacity="0"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    );
+  }
+
+  // ==========================================
+  // 2. LOGO STANDAR MONOKROM (IKUT WARNA TEXT)
+  // ==========================================
+  const d = iconPaths[iconName];
+  if (!d) return null;
+
+  return (
+    <svg className={className} style={style} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d={d} fill="currentColor" />
+    </svg>
+  );
+}
+
+const iconPaths: Record<string, string> = {
   github:
     "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
   linkedin:
@@ -13,42 +160,4 @@ export const iconPaths: Record<string, string> = {
     "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.004c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413",
   gmail:
     "M24 5.457v13.086c0 1.354-1.098 2.457-2.461 2.457H19.077v-8.123L12 17.154l-7.077-4.278v8.123H2.461C1.098 21 0 19.897 0 18.543V5.457c0-1.354 1.098-2.457 2.461-2.457H4.923L12 8.585l7.077-5.585h2.461C23.013 3 24 4.103 24 5.457z",
-  vuedotjs: 
-    "M24 1.61h-6.28L12 11.52 6.28 1.61H0l12 20.78zM17.72 1.61H12L6.28 1.61 12 11.52z",
-  nextdotjs:
-    "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.75 18.25l-6.19-7.97v7.97h-1.63v-10.5h1.56l6.19 7.97v-7.97h1.63v10.5h-1.56z",
-  tailwindcss:
-    "M12 6.5c-2.5 0-4 1.25-4.5 3.75 1-1.25 2.25-1.75 3.75-1.5 1.14.19 1.95.83 2.84 1.55 1.47 1.19 3.18 2.57 6.4 2.57 2.5 0 4-1.25 4.5-3.75-1 1.25-2.25 1.75-3.75 1.5-1.14-.19-1.95-.83-2.84-1.55-1.47-1.19-3.18-2.57-6.41-2.57zm-8 7c-2.5 0-4 1.25-4.5 3.75 1-1.25 2.25-1.75 3.75-1.5 1.14.19 1.95.83 2.85 1.55 1.46 1.19 3.17 2.57 6.4 2.57 2.5 0 4-1.25 4.5-3.75-1 1.25-2.25 1.75-3.75 1.5-1.14-.19-1.95-.83-2.84-1.55-1.47-1.19-3.19-2.57-6.41-2.57z",
-  adobepremierepro:
-    "M24 0v24H0V0h24zM11.54 12.87c0-2.31-1.15-3.41-3.21-3.41H5.4v9.01h1.58v-2.83h1.34c2.07 0 3.22-1.07 3.22-2.77zm-1.59.02c0 .9-.49 1.34-1.48 1.34H6.98v-2.7h1.49c.99 0 1.48.44 1.48 1.36zm10.37 1.27c0-1.18-.81-1.68-2.37-2.02-1.3-.28-1.58-.58-1.58-1.07 0-.51.46-.86 1.26-.86.84 0 1.33.34 1.38.98h1.51c-.07-1.43-1.13-2.31-2.89-2.31-1.73 0-2.82.91-2.82 2.24 0 1.22.79 1.7 2.45 2.05 1.34.29 1.51.65 1.51 1.11 0 .54-.51.93-1.39.93-.97 0-1.52-.41-1.58-1.2h-1.54c.07 1.55 1.19 2.5 3.12 2.5 1.93-.01 2.94-.91 2.94-2.35z",
-  adobeaftereffects:
-    "M24 0v24H0V0h24zM8.91 14.54H5.21l-.75 2.4H2.82L6.37 6.5h1.45l3.55 10.44H9.66l-.75-2.4zm-3.34-1.32h2.97L7.05 8.78l-1.48 4.44zm11.77-1.54c-.1-.7-.66-1.12-1.5-1.12-.98 0-1.63.78-1.63 2.18 0 1.38.63 2.17 1.6 2.17.89 0 1.42-.46 1.52-1.2h1.53c-.12 1.57-1.17 2.54-3.05 2.54-2.02 0-3.21-1.37-3.21-3.51 0-2.17 1.23-3.52 3.25-3.52 1.83 0 2.91.95 3.02 2.46h-1.53z",
-  davinciresolve:
-    "M12 24c6.627 0 12-5.373 12-12S19.627 0 12 0 0 5.373 0 12s5.373 12 12 12zm-3.57-14.773a2.766 2.766 0 013.911 0 2.766 2.766 0 010 3.911 2.766 2.766 0 01-3.91 0 2.766 2.766 0 010-3.911zm7.14 0a2.766 2.766 0 013.91 0 2.766 2.766 0 010 3.911 2.766 2.766 0 01-3.91 0 2.766 2.766 0 010-3.911zM12 15.352a2.766 2.766 0 013.911 3.911 2.766 2.766 0 01-3.911 0 2.766 2.766 0 010-3.911z",
-  dji: 
-    "M0 8.854v6.292h4.59v-1.748H2.1v-2.796h2.49V8.854H0zm6.12 0v4.544h2.49V8.854h2.1v6.292H6.12v-1.748H8.61V8.854H6.12zm6.63 0v6.292h2.1V8.854h-2.1zm3.15 0v1.748h2.49v2.796h-2.49v1.748h4.59V8.854h-4.59z",
 };
-
-export function Icon({
-  name,
-  className,
-  style,
-}: {
-  name: string;
-  className?: string;
-  style?: CSSProperties;
-}) {
-  const d = iconPaths[name.toLowerCase()]; // Penanganan otomatis jika input case-sensitive
-  if (!d) return null;
-  return (
-    <svg 
-      className={className} 
-      style={style} 
-      viewBox="0 0 24 24" 
-      xmlns="http://www.w3.org/2000/svg" 
-      aria-hidden="true"
-    >
-      <path d={d} fill="currentColor" />
-    </svg>
-  );
-}
