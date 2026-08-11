@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-electric-blue: #3b82f6;
+  --color-dark-base: #020617;
+  --color-deep-navy: #1e3a8a;
+}
+
+body {
+  background-color: #020617;
+  color: #f1f5f9;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Efek Grainy Overlay agar terlihat sinematik */
+.grainy-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* Cursor Spotlight Effect */
+.spotlight {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(2, 6, 23, 0) 70%);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: -5;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+}
