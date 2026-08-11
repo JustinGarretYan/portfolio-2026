@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/icons";
 import { BackgroundBubbles } from "@/components/BackgroundBubbles";
 import { RadarChart } from "@/components/RadarChart";
+import { PricelistSection } from '../components/PricelistSection';
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -74,7 +75,6 @@ const dict = {
 
 const profile = {
   name: "Justin Garret Yan",
-  birth: "October 11, 2003",
   avatar: "/assets/JGY06676_optimized.jpg",
   socials: [
     { name: "github", label: "Github", url: "https://github.com/JustinGarretYan" },
@@ -178,7 +178,6 @@ const logData = {
 const radarLabels = ["Premiere", "After FX", "Vue/Next", "Drone", "CapCut", "DaVinci"];
 const radarValues = [100, 80, 90, 95, 80, 50];
 
-// PERBAIKAN UTAMA: Mapping warna global berbasis class Tailwind CSS agar tidak bentrok dengan parser SVG
 const BRAND_TAILWIND_COLORS: Record<string, string> = {
   github: "text-slate-400 group-hover:text-white",
   linkedin: "text-[#0A66C2] group-hover:text-white",
@@ -186,8 +185,6 @@ const BRAND_TAILWIND_COLORS: Record<string, string> = {
   youtube: "text-[#FF0000] group-hover:text-white",
   whatsapp: "text-[#25D366] group-hover:text-white",
   gmail: "text-[#EA4335] group-hover:text-white",
-  
-  // Kosongkan agar membaca warna SVG asli multi-element bawaan komponen Icon
   vuedotjs: "",
   nextdotjs: "",
   tailwindcss: "",
@@ -258,6 +255,14 @@ function Portfolio() {
     localStorage.setItem("portfolio-lang", next);
   };
 
+  const scrollToPricelist = (category: string) => {
+    const el = document.getElementById("pricelist");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    window.dispatchEvent(new CustomEvent('change-pricelist-tab', { detail: category }));
+  };
+
   const reels = videoReels.filter((r) => r.type === videoTab);
   const [first, ...rest] = profile.name.split(" ");
 
@@ -307,34 +312,30 @@ function Portfolio() {
                 {t.heroAbout}
               </p>
 
-              <div className="grid grid-cols-1 gap-3 border-l-2 border-navy-500/30 py-1 pl-4 font-mono text-xs text-slate-400 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-3 border-l-2 border-navy-500/30 py-1 pl-4 font-mono text-xs text-slate-400 sm:grid-cols-2">
                 <div className="flex items-center gap-2">📍 {t.location}</div>
-                <div className="flex items-center gap-2">📅 {profile.birth}</div>
                 <div className="flex items-center gap-2">🎓 {t.eduLabel.split(" — ")[0]}</div>
               </div>
 
               {/* SOCIALS WRAPPER */}
               <div className="flex flex-wrap gap-2 pt-1">
-                {profile.socials.map((s) => {
-                  const currentBrandColor = BRAND_TAILWIND_COLORS[s.name.toLowerCase()] || "text-slate-400";
-                  return (
-                    <a
-                      key={s.name}
-                      href={s.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center gap-2.5 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-2.5 transition-all duration-300 hover:border-electric hover:bg-navy-600"
-                    >
-                      <Icon 
-  name={s.name} 
-  className={`h-4 w-4 ${BRAND_TAILWIND_COLORS[s.name.toLowerCase()] || "text-slate-400"}`} 
-/>
-                      <span className="text-xs font-semibold tracking-wider text-slate-300 group-hover:text-white">
-                        {s.label}
-                      </span>
-                    </a>
-                  );
-                })}
+                {profile.socials.map((s) => (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2.5 rounded-xl border border-white/5 bg-white/[0.03] px-4 py-2.5 transition-all duration-300 hover:border-electric hover:bg-navy-600"
+                  >
+                    <Icon
+                      name={s.name}
+                      className={`h-4 w-4 ${BRAND_TAILWIND_COLORS[s.name.toLowerCase()] || "text-slate-400"}`}
+                    />
+                    <span className="text-xs font-semibold tracking-wider text-slate-300 group-hover:text-white">
+                      {s.label}
+                    </span>
+                  </a>
+                ))}
               </div>
 
               <div className="flex flex-wrap gap-4 pt-3">
@@ -360,8 +361,8 @@ function Portfolio() {
                 className="group relative aspect-square w-64 animate-float-slow rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-white/10 to-transparent p-2 shadow-card transition-transform duration-200 ease-out md:w-80 [transform-style:preserve-3d]"
               >
                 <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-[2.2rem] bg-gradient-to-br from-navy-700 via-ink-deep to-ink">
-                  <img 
-                    src={profile.avatar} 
+                  <img
+                    src={profile.avatar}
                     alt={profile.name}
                     className="absolute inset-0 h-full w-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
                   />
@@ -399,7 +400,7 @@ function Portfolio() {
 
         {/* HUB */}
         <div id="hub" className="scroll-mt-24 space-y-12 pt-8">
-
+          {/* NAV TAB */}
           <nav className="glass mx-auto flex max-w-lg justify-center rounded-2xl p-1.5">
             {(["engineering", "video", "log"] as const).map((key) => (
               <button
@@ -421,53 +422,62 @@ function Portfolio() {
                 <SectionHead title={t.engineeringTitle} desc={t.engineeringDesc} />
                 <div className="grid gap-6 md:grid-cols-2">
                   {engineering[locale].map((p, i) => (
-                    <a
-                      key={p.title}
-                      href={p.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-reveal
-                      style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
-                      className="group relative block overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-electric/40 hover:bg-white/[0.04]"
-                    >
-                      <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-[5rem] bg-navy-500/5 transition-colors duration-500 group-hover:bg-navy-500/15" />
-                      <div className="mb-6 flex items-center justify-between">
-                        <div className="flex gap-3">
-                          {p.icons.map((ic) => {
-                            const currentBrandColor = BRAND_TAILWIND_COLORS[ic.toLowerCase()] || "text-slate-400";
-                            return (
-                              <div
-                                key={ic}
-                                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/5 bg-white/5 transition-all duration-300 group-hover:border-electric/20 group-hover:bg-navy-700/30"
-                              >
-                                <Icon
-                                  name={ic}
-                                  className={`h-5 w-5 ${currentBrandColor} transition-transform duration-300 group-hover:scale-110`}
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/5 text-sm text-slate-400 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-navy-500/10 group-hover:text-navy-300">
-                          ↗
-                        </span>
-                      </div>
-                      <h3 className="mb-2.5 text-xl font-bold text-foreground transition-colors group-hover:text-navy-300">
-                        {p.title}
-                      </h3>
-                      <p className="mb-6 text-sm font-light leading-relaxed text-slate-400">{p.desc}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {p.tech.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-lg border border-navy-400/10 bg-navy-500/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-navy-300"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </a>
-                  ))}
+  <div
+    key={p.title}
+    data-reveal
+    style={{ ["--reveal-delay" as string]: `${i * 90}ms` }}
+    className="group relative block overflow-hidden rounded-3xl border border-white/5 bg-white/[0.02] p-8 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-electric/40 hover:bg-white/[0.04]"
+  >
+    <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-[5rem] bg-navy-500/5 transition-colors duration-500 group-hover:bg-navy-500/15" />
+    <div className="mb-6 flex items-center justify-between">
+      <div className="flex gap-3">
+        {p.icons.map((ic) => {
+          const currentBrandColor = BRAND_TAILWIND_COLORS[ic.toLowerCase()] || "text-slate-400";
+          return (
+            <div
+              key={ic}
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/5 bg-white/5 transition-all duration-300 group-hover:border-electric/20 group-hover:bg-navy-700/30"
+            >
+              <Icon
+                name={ic}
+                className={`h-5 w-5 ${currentBrandColor} transition-transform duration-300 group-hover:scale-110`}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex items-center gap-2">
+        {/* Tombol panah diberikan z-20 dan relative agar dapat diklik */}
+        <a
+          href={p.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-sm text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:translate-x-0.5 hover:bg-electric hover:text-white hover:shadow-glow cursor-pointer"
+          title="Visit Website"
+        >
+          ↗
+        </a>
+      </div>
+    </div>
+    <h3 className="mb-2.5 text-xl font-bold text-foreground transition-colors group-hover:text-navy-300">
+      {p.title}
+    </h3>
+    <p className="mb-6 text-sm font-light leading-relaxed text-slate-400">{p.desc}</p>
+    
+    <div className="flex flex-wrap items-center justify-between gap-4 mt-4 pt-4 border-t border-white/5">
+      <div className="flex flex-wrap gap-2">
+        {p.tech.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-lg border border-navy-400/10 bg-navy-500/10 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-navy-300"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+))}
                 </div>
               </section>
             )}
@@ -477,23 +487,31 @@ function Portfolio() {
               <section key="vid" className="animate-scale-up space-y-8">
                 <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
                   <SectionHead title={t.videoTitle} desc={t.videoDesc} />
-                  <div className="glass flex shrink-0 self-start rounded-xl p-1 md:self-auto">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <button
-                      onClick={() => setVideoTab("event")}
-                      className={`rounded-lg px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
-                        videoTab === "event" ? "bg-navy-600 text-white shadow-md" : "text-slate-400 hover:text-white"
-                      }`}
+                      onClick={() => scrollToPricelist('event')}
+                      className="rounded-xl bg-navy-600/30 border border-electric/30 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white hover:bg-navy-600 hover:text-white transition"
                     >
-                      {t.vidTabEvent}
+                      {locale === 'id' ? ' Lihat Pricelist Event/Wisuda' : ' View Event/Grad Pricing'}
                     </button>
-                    <button
-                      onClick={() => setVideoTab("drone")}
-                      className={`flex items-center gap-1.5 rounded-lg px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
-                        videoTab === "drone" ? "bg-navy-600 text-white shadow-md" : "text-slate-400 hover:text-white"
-                      }`}
-                    >
-                      🛸 {t.vidTabDrone}
-                    </button>
+                    <div className="glass flex shrink-0 self-start rounded-xl p-1 md:self-auto">
+                      <button
+                        onClick={() => setVideoTab("event")}
+                        className={`rounded-lg px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
+                          videoTab === "event" ? "bg-navy-600 text-white shadow-md" : "text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        {t.vidTabEvent}
+                      </button>
+                      <button
+                        onClick={() => setVideoTab("drone")}
+                        className={`flex items-center gap-1.5 rounded-lg px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
+                          videoTab === "drone" ? "bg-navy-600 text-white shadow-md" : "text-slate-400 hover:text-white"
+                        }`}
+                      >
+                        🛸 {t.vidTabDrone}
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -617,8 +635,8 @@ function Portfolio() {
                           rel="noopener noreferrer"
                           className={`group relative flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-gradient-to-br ${cert.tone} to-ink p-2 shadow-md transition-all hover:border-electric/30`}
                         >
-                          <img 
-                            src={cert.url} 
+                          <img
+                            src={cert.url}
                             alt={cert.title}
                             className="absolute inset-0 h-full w-full object-cover opacity-40 transition-opacity duration-300 group-hover:opacity-20"
                           />
@@ -668,6 +686,15 @@ function Portfolio() {
               </section>
             )}
           </div>
+
+          {/* PRICELIST SECTION CONTAINER */}
+          <section id="pricelist" className="scroll-mt-24 relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.03] via-white/[0.01] to-transparent p-6 shadow-2xl backdrop-blur-xl sm:p-8 md:p-10 mt-16">
+            <div className="absolute -top-24 -right-24 h-60 w-60 rounded-full bg-electric/10 blur-[80px]" />
+            <div className="absolute -bottom-24 -left-24 h-60 w-60 rounded-full bg-navy-600/20 blur-[80px]" />
+            <div className="relative z-10">
+              <PricelistSection locale={locale} />
+            </div>
+          </section>
         </div>
 
         {/* FOOTER */}
